@@ -13,20 +13,55 @@ struct PMNode {
 
 class PMTree {
  public:
-    explicit PMTree(const std::vector<char>& data);
-    ~PMTree();
+    explicit PMTree(const std::vector<char>& data) {
+        size_ = static_cast<int>(data.size());
+        root_ = new PMNode();
+        buildTree(root_, data);
+    }
 
-    PMNode* getRoot() const;
-    int getSize() const;
+    ~PMTree() {
+        deleteTree(root_);
+    }
+
+    PMNode* getRoot() const {
+        return root_;
+    }
+
+    int getSize() const {
+        return size_;
+    }
 
  private:
     PMNode* root_;
     int size_;
 
     void buildTree(PMNode* node,
-                   const std::vector<char>& available);
+                   const std::vector<char>& available) {
+        if (available.empty())
+            return;
 
-    void deleteTree(PMNode* node);
+        for (size_t i = 0; i < available.size(); ++i) {
+            PMNode* child = new PMNode(available[i]);
+
+            node->children.push_back(child);
+
+            std::vector<char> next = available;
+
+            next.erase(next.begin() + i);
+
+            buildTree(child, next);
+        }
+    }
+
+    void deleteTree(PMNode* node) {
+        if (node == nullptr)
+            return;
+
+        for (auto child : node->children)
+            deleteTree(child);
+
+        delete node;
+    }
 };
 
 std::vector<std::vector<char>> getAllPerms(PMTree& tree);
