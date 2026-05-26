@@ -35,6 +35,4 @@ std::vector<char> getPerm1(PMTree& tree, int num);
 
 std::vector<char> getPerm2(PMTree& tree, int num);
 
-long long factorial(int n);
-
 #endif  // INCLUDE_TREE_H_
