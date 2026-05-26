@@ -10,18 +10,6 @@
 
 namespace {
 
-int64_t factorial(int n) {// Copyright 2022 NNTU-CS
-#include <cstdint>
-#include <cstdlib>
-#include <fstream>
-#include <iostream>
-#include <locale>
-#include <vector>
-
-#include "tree.h"
-
-namespace {
-
 int64_t factorial(int n) {
     int64_t result = 1;
 
